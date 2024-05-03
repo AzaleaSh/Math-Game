@@ -1,0 +1,50 @@
+def main():
+    name = input("Enter your name: ")
+    welcome_message(name)
+
+    questions = [
+        {"question": "What is 2 + 2?", "answer": 4},
+        {"question": "What is the square of 5?", "answer": 25},
+        {"question": "What is the absolute value of -8?", "answer": 8, "hint": "Absolute value means the distance from zero."},
+        {"question": "What is the remainder when 13 is divided by 4?", "answer": 1, "hint": "Think about how many times 4 goes into 13 without going over."},
+        {"question": "What is the result of 10.5 multiplied by 2?", "answer": 21, "hint": "You can use a calculator or estimate the answer."}
+    ]
+
+    correct_answers = 0
+    while correct_answers < len(questions):
+        current_question = questions[correct_answers]
+        user_answer = ask_question(current_question)
+
+        if check_answer(user_answer, current_question):
+            correct_answers += 1
+            print("Correct!")
+        else:
+            provide_feedback(current_question)
+
+    congratulate(name, correct_answers)
+
+def welcome_message(name):
+    print(f"Hello, {name}! Welcome to the math quiz.")
+
+def ask_question(question):
+    user_answer = input(question["question"] + " ")
+    try:
+        return int(user_answer)  # Attempt to convert to integer for arithmetic questions
+    except ValueError:
+        return user_answer  # Return the string as-is for potentially non-numeric answers
+
+def check_answer(user_answer, question):
+    return user_answer == question["answer"]
+
+def provide_feedback(question):
+    print("Incorrect. The answer is", question["answer"])
+    if "hint" in question:
+        print("Hint:", question["hint"])
+
+def congratulate(name, correct_answers):
+    print(f"Congratulations, {name}! You got {correct_answers} out of 5 questions correct.")
+
+def welcome_name (name):
+    print ("Welcome to AZALEA'S MATH GAME " + name)
+
+main()
